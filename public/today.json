@@ -1,0 +1,7 @@
+{
+  "date": "2026-05-13",
+  "disassembled": ["HP ProDesk 600 G1 x5", "Dell OptiPlex 790 x3"],
+  "added_cpu": ["Intel Core i5-3470 x8", "Intel Core i7-3770 x4"],
+  "added_ddr3": ["Samsung 4GB DDR3-1600 x20", "Hynix 8GB DDR3-1333 x10"],
+  "notes": "All CPUs tested and cleaned."
+}
