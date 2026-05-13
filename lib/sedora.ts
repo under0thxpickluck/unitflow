@@ -115,4 +115,5 @@ export async function getProduct(id: string): Promise<Product | null> {
   return products.find((p) => p.id === id) ?? null
 }
 
-export { filterProducts, ProductFilter } from './filters'
+export { filterProducts } from './filters'
+export type { ProductFilter } from './filters'
