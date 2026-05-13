@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'UNITFLOW JAPAN',
+    url: process.env.NEXT_PUBLIC_BASE_URL ?? 'https://unitflow.jp',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'UNITFLOW JAPAN' }],
   },
   robots: { index: true, follow: true },
 }

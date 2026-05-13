@@ -19,7 +19,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-white font-bold text-lg tracking-tight">UNITFLOW</span>
-            <span className="text-gray-500 text-sm hidden sm:inline">JAPAN</span>
+            <span className="text-gray-500 text-sm">JAPAN</span>
           </Link>
 
           {/* Desktop nav */}
