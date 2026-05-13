@@ -38,6 +38,7 @@ const FALLBACK_PRODUCTS: Product[] = [
     category: 'Memory',
     brand: 'Samsung',
     model: 'M378B5273DH0-CK0',
+    memoryType: 'DDR3',
     condition: 'Tested',
     tested: true,
     ebay_url: 'https://www.ebay.com',
@@ -52,6 +53,7 @@ const FALLBACK_PRODUCTS: Product[] = [
     category: 'Memory',
     brand: 'Hynix',
     model: 'HMT41GU6BFR8C-H9',
+    memoryType: 'DDR3',
     condition: 'Tested',
     tested: true,
     ebay_url: 'https://www.ebay.com',
@@ -127,6 +129,7 @@ export function filterProducts(products: Product[], filter: ProductFilter): Prod
     if (filter.condition && p.condition !== filter.condition) return false
     if (filter.socket && p.socket !== filter.socket) return false
     if (filter.brand && p.brand !== filter.brand) return false
+    if (filter.memoryType && p.memoryType !== filter.memoryType) return false
     return true
   })
 }

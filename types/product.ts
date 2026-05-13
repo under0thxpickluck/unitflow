@@ -12,6 +12,7 @@ export interface Product {
   brand: string
   model: string
   socket?: string
+  memoryType?: string
   condition: ProductCondition
   tested: boolean
   ebay_url: string

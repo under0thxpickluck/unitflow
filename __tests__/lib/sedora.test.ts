@@ -63,5 +63,35 @@ describe('sedora lib', () => {
       const result = filterProducts(products, {})
       expect(result).toHaveLength(1)
     })
+
+    it('filters by socket', () => {
+      const products: Product[] = [
+        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', socket: 'LGA1155', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', category: 'CPU', title_en: 'FX', title_ja: '', brand: 'AMD', model: 'FX-8350', socket: 'AM3+', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+      ]
+      const result = filterProducts(products, { socket: 'LGA1155' })
+      expect(result).toHaveLength(1)
+      expect(result[0].id).toBe('1')
+    })
+
+    it('filters by brand', () => {
+      const products: Product[] = [
+        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', category: 'CPU', title_en: 'FX', title_ja: '', brand: 'AMD', model: 'FX-8350', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+      ]
+      const result = filterProducts(products, { brand: 'Intel' })
+      expect(result).toHaveLength(1)
+      expect(result[0].id).toBe('1')
+    })
+
+    it('filters by memoryType', () => {
+      const products: Product[] = [
+        { id: '1', category: 'Memory', title_en: 'DDR3', title_ja: '', brand: 'Samsung', model: 'M378B', memoryType: 'DDR3', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', category: 'Memory', title_en: 'DDR4', title_ja: '', brand: 'Crucial', model: 'CT8G4', memoryType: 'DDR4', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+      ]
+      const result = filterProducts(products, { memoryType: 'DDR3' })
+      expect(result).toHaveLength(1)
+      expect(result[0].id).toBe('1')
+    })
   })
 })
