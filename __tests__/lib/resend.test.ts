@@ -11,7 +11,7 @@ describe('buildContactEmailHtml', () => {
       email: 'john@example.com',
       ebayUsername: 'johnsmith99',
       desiredParts: 'Core i5-3470 x50',
-      quantity: '50',
+      quantity: '50 units',
       message: 'Need bulk CPUs monthly',
     })
     expect(html).toContain('John Smith')
@@ -20,6 +20,7 @@ describe('buildContactEmailHtml', () => {
     expect(html).toContain('john@example.com')
     expect(html).toContain('johnsmith99')
     expect(html).toContain('Core i5-3470 x50')
+    expect(html).toContain('50 units')
     expect(html).toContain('Need bulk CPUs monthly')
   })
 })
