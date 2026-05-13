@@ -9,6 +9,7 @@ const ibmPlex = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], vari
 const notoSansJP = Noto_Sans_JP({ subsets: ['latin'], variable: '--font-noto' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://unitflow.jp'),
   title: {
     default: 'UNITFLOW JAPAN — Used PC Parts from Japan',
     template: '%s | UNITFLOW JAPAN',
