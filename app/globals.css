@@ -4,13 +4,23 @@
   --color-bg-primary: #0f1115;
   --color-bg-secondary: #161a20;
   --color-bg-tertiary: #1d222b;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #9ca3af;
+
+  --color-status-in-stock: #22c55e;
+  --color-status-listed: #3b82f6;
+  --color-status-junk: #f97316;
+  --color-status-sold: #6b7280;
+
   --font-sans: var(--font-inter), var(--font-noto), sans-serif;
   --font-mono: var(--font-ibm-plex), monospace;
 }
 
 @layer base {
   body {
-    background-color: #0f1115;
-    color: #ffffff;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
   }
 }
