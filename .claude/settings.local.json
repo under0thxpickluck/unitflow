@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Move-Item *)",
+      "Bash(git -C C:/Users/unitu/unitflow show 7ce422c:jest.config.ts)",
+      "Bash(git *)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\unitu\\\\unitflow\" -Recurse -Directory | Where-Object { $_.Name -eq \"__tests__\" -or $_.Name -eq \"lib\" })",
+      "PowerShell(New-Item *)",
+      "Bash(npx jest *)",
+      "Bash(npm test *)",
+      "Bash(npm run *)"
+    ]
+  }
+}
