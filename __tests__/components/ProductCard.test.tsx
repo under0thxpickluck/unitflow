@@ -4,6 +4,7 @@ import { Product } from '@/types/product'
 
 const mockProduct: Product = {
   id: 'cpu-001',
+  slug: 'intel-core-i5-3470-lga1155-cpu',
   title_en: 'Intel Core i5-3470 3.20GHz LGA1155',
   title_ja: 'Intel Core i5-3470',
   category: 'CPU',
@@ -43,5 +44,17 @@ describe('ProductCard', () => {
   it('renders In Stock when stock > 0', () => {
     render(<ProductCard product={mockProduct} />)
     expect(screen.getByText(/in stock/i)).toBeInTheDocument()
+  })
+
+  it('renders Details link pointing to /products/[slug]', () => {
+    render(<ProductCard product={mockProduct} />)
+    const link = screen.getByRole('link', { name: /details/i })
+    expect(link).toHaveAttribute('href', '/products/intel-core-i5-3470-lga1155-cpu')
+  })
+
+  it('title link points to /products/[slug]', () => {
+    render(<ProductCard product={mockProduct} />)
+    const titleLink = screen.getByRole('link', { name: /intel core i5-3470/i })
+    expect(titleLink).toHaveAttribute('href', '/products/intel-core-i5-3470-lga1155-cpu')
   })
 })

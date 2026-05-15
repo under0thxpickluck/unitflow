@@ -1,4 +1,4 @@
-import { getProducts, getProduct, filterProducts } from '@/lib/sedora'
+import { getProducts, getProduct, getProductBySlug, filterProducts } from '@/lib/sedora'
 import { Product } from '@/types/product'
 
 describe('sedora lib', () => {
@@ -35,11 +35,26 @@ describe('sedora lib', () => {
     })
   })
 
+  describe('getProductBySlug', () => {
+    it('returns a product when slug matches', async () => {
+      const products = await getProducts()
+      const slug = products[0].slug
+      const product = await getProductBySlug(slug)
+      expect(product).not.toBeNull()
+      expect(product?.slug).toBe(slug)
+    })
+
+    it('returns null when slug does not match', async () => {
+      const product = await getProductBySlug('nonexistent-slug-xyz')
+      expect(product).toBeNull()
+    })
+  })
+
   describe('filterProducts', () => {
     it('filters by category', () => {
       const products: Product[] = [
-        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
-        { id: '2', category: 'GPU', title_en: 'GTX', title_ja: '', brand: 'NVIDIA', model: 'GTX 1050', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '1', slug: 'intel-i5-3470-cpu', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', slug: 'nvidia-gtx-1050-gpu', category: 'GPU', title_en: 'GTX', title_ja: '', brand: 'NVIDIA', model: 'GTX 1050', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
       ]
       const result = filterProducts(products, { category: 'CPU' })
       expect(result).toHaveLength(1)
@@ -48,8 +63,8 @@ describe('sedora lib', () => {
 
     it('filters by condition', () => {
       const products: Product[] = [
-        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
-        { id: '2', category: 'CPU', title_en: 'i3', title_ja: '', brand: 'Intel', model: 'i3-3220', condition: 'Untested', tested: false, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '1', slug: 'intel-i5-3470-cpu', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', slug: 'intel-i3-3220-cpu', category: 'CPU', title_en: 'i3', title_ja: '', brand: 'Intel', model: 'i3-3220', condition: 'Untested', tested: false, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
       ]
       const result = filterProducts(products, { condition: 'Tested' })
       expect(result).toHaveLength(1)
@@ -58,7 +73,7 @@ describe('sedora lib', () => {
 
     it('returns all products when no filter applied', () => {
       const products: Product[] = [
-        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '1', slug: 'intel-i5-3470-cpu', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
       ]
       const result = filterProducts(products, {})
       expect(result).toHaveLength(1)
@@ -66,8 +81,8 @@ describe('sedora lib', () => {
 
     it('filters by socket', () => {
       const products: Product[] = [
-        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', socket: 'LGA1155', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
-        { id: '2', category: 'CPU', title_en: 'FX', title_ja: '', brand: 'AMD', model: 'FX-8350', socket: 'AM3+', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '1', slug: 'intel-i5-3470-lga1155-cpu', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', socket: 'LGA1155', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', slug: 'amd-fx-8350-am3-cpu', category: 'CPU', title_en: 'FX', title_ja: '', brand: 'AMD', model: 'FX-8350', socket: 'AM3+', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
       ]
       const result = filterProducts(products, { socket: 'LGA1155' })
       expect(result).toHaveLength(1)
@@ -76,8 +91,8 @@ describe('sedora lib', () => {
 
     it('filters by brand', () => {
       const products: Product[] = [
-        { id: '1', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
-        { id: '2', category: 'CPU', title_en: 'FX', title_ja: '', brand: 'AMD', model: 'FX-8350', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '1', slug: 'intel-i5-3470-cpu', category: 'CPU', title_en: 'i5', title_ja: '', brand: 'Intel', model: 'i5-3470', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', slug: 'amd-fx-8350-cpu', category: 'CPU', title_en: 'FX', title_ja: '', brand: 'AMD', model: 'FX-8350', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
       ]
       const result = filterProducts(products, { brand: 'Intel' })
       expect(result).toHaveLength(1)
@@ -86,8 +101,8 @@ describe('sedora lib', () => {
 
     it('filters by memoryType', () => {
       const products: Product[] = [
-        { id: '1', category: 'Memory', title_en: 'DDR3', title_ja: '', brand: 'Samsung', model: 'M378B', memoryType: 'DDR3', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
-        { id: '2', category: 'Memory', title_en: 'DDR4', title_ja: '', brand: 'Crucial', model: 'CT8G4', memoryType: 'DDR4', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '1', slug: 'samsung-m378b-memory', category: 'Memory', title_en: 'DDR3', title_ja: '', brand: 'Samsung', model: 'M378B', memoryType: 'DDR3', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
+        { id: '2', slug: 'crucial-ct8g4-memory', category: 'Memory', title_en: 'DDR4', title_ja: '', brand: 'Crucial', model: 'CT8G4', memoryType: 'DDR4', condition: 'Tested', tested: true, ebay_url: '', ebay_image_url: '', stock: 1, listed_at: '' },
       ]
       const result = filterProducts(products, { memoryType: 'DDR3' })
       expect(result).toHaveLength(1)
