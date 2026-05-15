@@ -6,11 +6,13 @@ export type StockStatus = 'in-stock' | 'listed' | 'junk' | 'sold'
 
 export interface Product {
   id: string
+  slug: string
   title_en: string
   title_ja: string
   category: ProductCategory
   brand: string
   model: string
+  partNumber?: string
   socket?: string
   memoryType?: string
   condition: ProductCondition
@@ -19,6 +21,7 @@ export interface Product {
   ebay_image_url: string
   stock: number
   listed_at: string
+  updatedAt?: string
   sold_at?: string
 }
 
