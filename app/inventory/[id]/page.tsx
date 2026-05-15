@@ -1,5 +1,4 @@
-import { permanentRedirect } from 'next/navigation'
-import { notFound } from 'next/navigation'
+import { permanentRedirect, notFound } from 'next/navigation'
 import { getProduct } from '@/lib/sedora'
 
 interface Props {
@@ -10,5 +9,5 @@ export default async function OldProductPage({ params }: Props) {
   const { id } = await params
   const product = await getProduct(id)
   if (!product) notFound()
-  permanentRedirect(`/products/${product.slug}`)
+  return permanentRedirect(`/products/${product.slug}`)
 }
