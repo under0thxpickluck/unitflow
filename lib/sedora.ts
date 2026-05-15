@@ -1,6 +1,9 @@
 import { Product } from '@/types/product'
+import { createSlug } from '@/lib/slug'
 
-const FALLBACK_PRODUCTS: Product[] = [
+type RawProduct = Omit<Product, 'slug'>
+
+const FALLBACK_PRODUCTS: RawProduct[] = [
   {
     id: 'cpu-001',
     title_en: 'Intel Core i5-3470 3.20GHz LGA1155',
@@ -92,18 +95,22 @@ const FALLBACK_PRODUCTS: Product[] = [
   },
 ]
 
+function attachSlug(raw: RawProduct): Product {
+  return { ...raw, slug: createSlug({ brand: raw.brand, model: raw.model, socket: raw.socket, category: raw.category }) }
+}
+
 async function fetchFromSedora(): Promise<Product[]> {
   const url = process.env.SEDORA_API_URL
   const key = process.env.SEDORA_API_KEY
-  if (!url || !key) return FALLBACK_PRODUCTS
+  if (!url || !key) return FALLBACK_PRODUCTS.map(attachSlug)
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${key}` },
     next: { revalidate: 3600 },
   })
-  if (!res.ok) return FALLBACK_PRODUCTS
+  if (!res.ok) return FALLBACK_PRODUCTS.map(attachSlug)
   const data = await res.json()
-  return data as Product[]
+  return (data as RawProduct[]).map(attachSlug)
 }
 
 export async function getProducts(): Promise<Product[]> {
@@ -113,6 +120,11 @@ export async function getProducts(): Promise<Product[]> {
 export async function getProduct(id: string): Promise<Product | null> {
   const products = await getProducts()
   return products.find((p) => p.id === id) ?? null
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const products = await getProducts()
+  return products.find((p) => p.slug === slug) ?? null
 }
 
 export { filterProducts } from './filters'
