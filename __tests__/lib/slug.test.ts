@@ -22,7 +22,8 @@ describe('createSlug', () => {
   })
 
   it('strips leading and trailing hyphens', () => {
-    expect(createSlug({ brand: 'Intel', model: 'i7-4770', category: 'CPU' }))
+    // brand starting with special char produces a leading hyphen that must be stripped
+    expect(createSlug({ brand: '!Intel', model: 'i7-4770', category: 'CPU' }))
       .toBe('intel-i7-4770-cpu')
   })
 })
