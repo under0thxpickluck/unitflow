@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getProducts } from '@/lib/sedora'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://unitflow.jp'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts()

@@ -9,7 +9,7 @@ const ibmPlex = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], vari
 const notoSansJP = Noto_Sans_JP({ subsets: ['latin'], variable: '--font-noto' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://unitflow.jp'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'),
   title: {
     default: 'UNITFLOW JAPAN — Used PC Parts from Japan',
     template: '%s | UNITFLOW JAPAN',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'UNITFLOW JAPAN',
-    url: process.env.NEXT_PUBLIC_BASE_URL ?? 'https://unitflow.jp',
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'UNITFLOW JAPAN' }],
   },
   robots: { index: true, follow: true },
@@ -32,7 +32,7 @@ const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'UNITFLOW JAPAN',
-  url: process.env.NEXT_PUBLIC_BASE_URL ?? 'https://unitflow.jp',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp',
   description: 'Used PC parts specialist in Japan. Sourced from business PCs. Tested and shipped worldwide.',
   areaServed: 'Worldwide',
   knowsAbout: ['used PC parts', 'used CPU', 'used memory', 'DDR3', 'OEM PC parts', 'Japan electronics'],

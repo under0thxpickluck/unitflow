@@ -91,7 +91,6 @@ export default async function ProductPage({ params }: Props) {
     offers: {
       '@type': 'Offer',
       url: product.ebay_url,
-      priceCurrency: 'USD',
       availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: { '@type': 'Organization', name: 'UNITFLOW JAPAN' },
     },
@@ -121,7 +120,7 @@ export default async function ProductPage({ params }: Props) {
           <span>/</span>
           <Link href={`/categories/${categoryPath}`} className="hover:text-gray-300">{product.category}</Link>
           <span>/</span>
-          <span className="text-gray-400">{product.model}</span>
+          <span className="text-gray-400 truncate max-w-[200px]">{product.title_en}</span>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
