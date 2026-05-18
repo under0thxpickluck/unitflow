@@ -29,7 +29,7 @@ export function buildContactEmailHtml(data: ContactFormData): string {
 
 export async function sendContactEmail(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
   const apiKey = process.env.RESEND_API_KEY
-  const toEmail = process.env.CONTACT_TO_EMAIL ?? 'unitegawa@outlook.jp'
+  const toEmail = process.env.CONTACT_TO_EMAIL ?? 'i0000e.bay@gmail.com'
 
   if (!apiKey) {
     return { success: false, error: 'RESEND_API_KEY not configured' }

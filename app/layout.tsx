@@ -23,7 +23,6 @@ export const metadata: Metadata = {
     locale: 'en_US',
     siteName: 'UNITFLOW JAPAN',
     url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'UNITFLOW JAPAN' }],
   },
   robots: { index: true, follow: true },
 }
