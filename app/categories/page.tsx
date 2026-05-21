@@ -3,9 +3,12 @@ import Link from 'next/link'
 import { getProducts } from '@/lib/sedora'
 import { ProductCategory } from '@/types/product'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+
 export const metadata: Metadata = {
-  title: 'Categories',
+  title: 'Categories — Used PC Parts from Japan',
   description: 'Browse used PC parts by category — CPU, GPU, Memory, Motherboard, PSU, Storage. Sourced from business PCs in Japan.',
+  alternates: { canonical: `${SITE_URL}/categories` },
 }
 
 const CATEGORY_INFO: Record<ProductCategory, { desc: string }> = {
@@ -30,7 +33,7 @@ export default async function CategoriesPage() {
       <p className="text-gray-500 text-sm mb-10">Browse by component type</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {(Object.keys(CATEGORY_INFO) as ProductCategory[]).map((cat) => (
-          <Link key={cat} href={`/inventory?category=${cat}`}
+          <Link key={cat} href={`/categories/${cat.toLowerCase()}`}
             className="bg-bg-secondary border border-white/10 hover:border-white/20 rounded p-6 transition-colors group">
             <div className="flex items-start justify-between mb-4">
               <span className="text-xs font-mono text-gray-600 bg-bg-primary px-2 py-1 rounded ml-auto">

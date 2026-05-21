@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+
 export const metadata: Metadata = {
-  title: 'Bulk Orders',
+  title: 'Bulk Orders — Used PC Parts from Japan',
   description: 'Bulk used PC parts from Japan. Mixed lots, monthly sourcing, long-term supply for repair shops, schools, and resellers.',
+  alternates: { canonical: `${SITE_URL}/bulk-orders` },
 }
 
 export default function BulkOrdersPage() {

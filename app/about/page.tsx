@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'UNITFLOW JAPAN specializes in used PC parts from business computers in Japan. Tested, graded, and shipped worldwide.',
+  title: 'About — Used PC Parts Supplier from Japan',
+  description: 'UNITFLOW JAPAN specializes in sourcing, testing, and listing used PC parts from Japanese business PCs. Ships worldwide through eBay.',
+  alternates: { canonical: `${SITE_URL}/about` },
 }
 
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-2xl font-bold text-white mb-8">About UNITFLOW JAPAN</h1>
+      <h1 className="text-2xl font-bold text-white mb-8">Used PC Parts Supplier from Japan</h1>
       <div className="bg-bg-secondary border border-white/10 rounded p-6 mb-6">
         <p className="text-gray-300 leading-relaxed">
           We are a used PC parts specialist based in Japan, focused on sourcing, testing, and exporting

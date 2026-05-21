@@ -6,9 +6,12 @@ import { TodaysProcessing } from '@/types/product'
 import { readFile } from 'fs/promises'
 import path from 'path'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+
 export const metadata: Metadata = {
   title: 'UNITFLOW JAPAN — Reliable Used PC Parts from Japan',
   description: 'Tested CPUs, memory, motherboards, GPUs and OEM parts sourced from business PCs in Japan. Ships worldwide via eBay.',
+  alternates: { canonical: SITE_URL },
 }
 
 async function getTodaysProcessing(): Promise<TodaysProcessing> {
@@ -74,6 +77,17 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Keyword band */}
+      <div className="border-b border-white/5 bg-bg-primary py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap gap-x-6 gap-y-1 justify-center">
+            {['Used CPUs', 'DDR3 Memory', 'OEM Motherboards', 'GPUs', 'Power Supplies', 'Storage', 'Ships from Japan'].map((kw) => (
+              <span key={kw} className="text-xs font-mono text-gray-600">{kw}</span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Live Inventory */}
       <section className="bg-bg-secondary border-y border-white/10 py-16">

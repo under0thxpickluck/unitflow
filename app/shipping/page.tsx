@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+
 export const metadata: Metadata = {
-  title: 'Shipping',
+  title: 'International Shipping from Japan | UNITFLOW JAPAN',
   description: 'UNITFLOW JAPAN ships worldwide from Japan via eBay Global Shipping. All orders include tracking and secure packaging.',
+  alternates: { canonical: `${SITE_URL}/shipping` },
 }
 
 export default function ShippingPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-2xl font-bold text-white mb-8">Shipping</h1>
+      <h1 className="text-2xl font-bold text-white mb-8">International Shipping from Japan</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
         {[
           { title: 'Ships from Japan', desc: 'All items ship directly from our warehouse in Japan.' },

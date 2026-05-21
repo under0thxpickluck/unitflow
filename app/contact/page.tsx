@@ -4,9 +4,12 @@ import path from 'path'
 import Image from 'next/image'
 import ContactForm from '@/components/ContactForm'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact — UNITFLOW JAPAN',
   description: 'Contact UNITFLOW JAPAN for bulk orders, sourcing requests, or general inquiries about used PC parts from Japan.',
+  alternates: { canonical: `${SITE_URL}/contact` },
 }
 
 export default function ContactPage() {
