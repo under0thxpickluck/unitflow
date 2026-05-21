@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
-  const hasWhatsApp = existsSync(path.join(process.cwd(), 'public', 'whatapp.jpg'))
+  const hasWhatsApp = existsSync(path.join(process.cwd(), 'public', 'whatapp.png'))
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -23,16 +23,13 @@ export default function ContactPage() {
       {hasWhatsApp && (
         <div className="mt-12 border-t border-white/10 pt-8">
           <h2 className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">WhatsApp</h2>
-          <div className="bg-bg-secondary border border-white/10 rounded p-4 inline-block">
-            <div className="relative overflow-hidden rounded" style={{ width: 200, height: 200 }}>
-              <Image
-                src="/whatapp.jpg"
-                alt="WhatsApp QR code"
-                fill
-                className="object-cover"
-                style={{ objectPosition: 'center 53%' }}
-              />
-            </div>
+          <div className="inline-block rounded-2xl overflow-hidden">
+            <Image
+              src="/whatapp.png"
+              alt="WhatsApp QR code"
+              width={220}
+              height={220}
+            />
           </div>
         </div>
       )}
