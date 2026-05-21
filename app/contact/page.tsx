@@ -24,13 +24,15 @@ export default function ContactPage() {
         <div className="mt-12 border-t border-white/10 pt-8">
           <h2 className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">WhatsApp</h2>
           <div className="bg-bg-secondary border border-white/10 rounded p-4 inline-block">
-            <Image
-              src="/whatapp.jpg"
-              alt="WhatsApp contact"
-              width={200}
-              height={200}
-              className="rounded"
-            />
+            <div className="relative overflow-hidden rounded" style={{ width: 200, height: 200 }}>
+              <Image
+                src="/whatapp.jpg"
+                alt="WhatsApp QR code"
+                fill
+                className="object-cover"
+                style={{ objectPosition: 'center 53%' }}
+              />
+            </div>
           </div>
         </div>
       )}
