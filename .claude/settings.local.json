@@ -8,7 +8,23 @@
       "PowerShell(New-Item *)",
       "Bash(npx jest *)",
       "Bash(npm test *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(vercel *)",
+      "Bash(npx vercel *)",
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Bash(npx tsc *)",
+      "Bash(node -e ' *)",
+      "Skill(superpowers:using-superpowers)",
+      "Bash(New-Item *)",
+      "Bash(grep *)",
+      "Skill(superpowers:verification-before-completion)",
+      "Bash(npx eslint *)",
+      "Bash(mkdir \"C:\\\\Users\\\\unitu\\\\unitflow\\\\app\\\\socket\\\\[socket]\")",
+      "Bash(mkdir \"C:\\\\Users\\\\unitu\\\\unitflow\\\\app\\\\memory\\\\[type]\")",
+      "Bash(mkdir -p \"app/socket/[socket]\")",
+      "Bash(mkdir -p \"app/memory/[type]\")"
     ]
   }
 }
