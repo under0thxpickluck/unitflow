@@ -27,13 +27,18 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
+const EBAY_URL = process.env.NEXT_PUBLIC_EBAY_STORE_URL ?? 'https://www.ebay.com'
+
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'UNITFLOW JAPAN',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp',
-  description: 'Used PC parts specialist in Japan. Sourced from business PCs. Tested and shipped worldwide.',
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+  description: 'Used PC parts supplier from Japan. CPUs, memory, motherboards, GPUs and OEM parts shipped worldwide through eBay.',
   areaServed: 'Worldwide',
+  sameAs: [EBAY_URL],
   knowsAbout: ['used PC parts', 'used CPU', 'used memory', 'DDR3', 'OEM PC parts', 'Japan electronics'],
 }
 

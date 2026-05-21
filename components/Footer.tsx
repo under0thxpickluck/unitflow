@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+const EBAY_URL = process.env.NEXT_PUBLIC_EBAY_STORE_URL ?? 'https://www.ebay.com'
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-bg-secondary mt-20">
@@ -19,9 +21,10 @@ export default function Footer() {
               {[
                 ['/inventory', 'Inventory'],
                 ['/categories', 'Categories'],
+                ['/guides', 'Guides'],
                 ['/bulk-orders', 'Bulk Orders'],
                 ['/about', 'About Us'],
-                ['/quality', 'Quality Policy'],
+                ['/quality-policy', 'Quality Policy'],
                 ['/shipping', 'Shipping'],
                 ['/faq', 'FAQ'],
                 ['/contact', 'Contact'],
@@ -36,7 +39,7 @@ export default function Footer() {
           <div>
             <p className="text-gray-400 text-xs uppercase tracking-widest mb-3">eBay</p>
             <a
-              href="https://www.ebay.com"
+              href={EBAY_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded transition-colors mb-4"
