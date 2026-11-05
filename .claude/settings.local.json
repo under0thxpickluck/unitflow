@@ -24,7 +24,13 @@
       "Bash(mkdir \"C:\\\\Users\\\\unitu\\\\unitflow\\\\app\\\\socket\\\\[socket]\")",
       "Bash(mkdir \"C:\\\\Users\\\\unitu\\\\unitflow\\\\app\\\\memory\\\\[type]\")",
       "Bash(mkdir -p \"app/socket/[socket]\")",
-      "Bash(mkdir -p \"app/memory/[type]\")"
+      "Bash(mkdir -p \"app/memory/[type]\")",
+      "Bash(node *)",
+      "PowerShell($bytes = New-Object byte[] 32; [Security.Cryptography.RandomNumberGenerator]::Create\\(\\).GetBytes\\($bytes\\); [BitConverter]::ToString\\($bytes\\) -replace '-', '')",
+      "Bash(curl *)",
+      "Bash(python3 *)",
+      "PowerShell(python -c \"from PIL import Image; print\\('ok'\\)\" 2>&1)",
+      "Bash(python -c ' *)"
     ]
   }
 }
