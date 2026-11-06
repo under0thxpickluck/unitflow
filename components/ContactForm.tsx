@@ -4,9 +4,10 @@ import { useState } from 'react'
 interface FormState {
   name: string; company: string; country: string; email: string
   ebayUsername: string; desiredParts: string; quantity: string; message: string
+  website: string // ボット避け（人には見えない）
 }
 
-const INITIAL: FormState = { name: '', company: '', country: '', email: '', ebayUsername: '', desiredParts: '', quantity: '', message: '' }
+const INITIAL: FormState = { name: '', company: '', country: '', email: '', ebayUsername: '', desiredParts: '', quantity: '', message: '', website: '' }
 
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(INITIAL)
@@ -20,11 +21,18 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('loading')
     setErrorMsg('')
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
+    let res: Response
+    try {
+      res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+    } catch {
+      setStatus('error')
+      setErrorMsg('Network error. Please try again.')
+      return
+    }
     if (res.ok) { setStatus('success'); setForm(INITIAL) }
     else {
       const data = await res.json().catch(() => ({}))
@@ -47,6 +55,9 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="hidden" aria-hidden="true">
+        <label>Website<input tabIndex={-1} autoComplete="off" value={form.website} onChange={set('website')} /></label>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className={labelClass}>Name *</label><input required value={form.name} onChange={set('name')} placeholder="Your name" className={inputClass} /></div>
         <div><label className={labelClass}>Company</label><input value={form.company} onChange={set('company')} placeholder="Company name" className={inputClass} /></div>

@@ -11,18 +11,36 @@ export interface ContactFormData {
   message: string
 }
 
+export function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+const ROWS: [string, keyof ContactFormData][] = [
+  ['Name', 'name'],
+  ['Company', 'company'],
+  ['Country', 'country'],
+  ['Email', 'email'],
+  ['eBay Username', 'ebayUsername'],
+  ['Desired Parts', 'desiredParts'],
+  ['Quantity', 'quantity'],
+  ['Message', 'message'],
+]
+
+// 入力はすべて外部の人が書いたもの。HTML として解釈されないよう必ずエスケープする
 export function buildContactEmailHtml(data: ContactFormData): string {
+  const rows = ROWS.map(
+    ([label, key]) =>
+      `<tr><td style="padding:8px;font-weight:bold">${label}</td><td style="padding:8px;white-space:pre-wrap">${escapeHtml(data[key] ?? '')}</td></tr>`,
+  ).join('\n')
   return `
     <h2>New Contact from UNITFLOW JAPAN</h2>
     <table style="border-collapse:collapse;width:100%">
-      <tr><td style="padding:8px;font-weight:bold">Name</td><td style="padding:8px">${data.name}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">Company</td><td style="padding:8px">${data.company}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">Country</td><td style="padding:8px">${data.country}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">Email</td><td style="padding:8px">${data.email}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">eBay Username</td><td style="padding:8px">${data.ebayUsername}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">Desired Parts</td><td style="padding:8px">${data.desiredParts}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">Quantity</td><td style="padding:8px">${data.quantity}</td></tr>
-      <tr><td style="padding:8px;font-weight:bold">Message</td><td style="padding:8px">${data.message}</td></tr>
+${rows}
     </table>
   `
 }
@@ -40,7 +58,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<{ success
     from: 'UNITFLOW JAPAN <noreply@unitflow.jp>',
     to: toEmail,
     replyTo: data.email,
-    subject: `[UNITFLOW] New inquiry from ${data.name} (${data.country})`,
+    subject: `[UNITFLOW] New inquiry from ${data.name} (${data.country})`.replace(/[\r\n]+/g, ' ').slice(0, 200),
     html: buildContactEmailHtml(data),
   })
 

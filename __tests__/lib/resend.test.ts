@@ -24,3 +24,22 @@ describe('buildContactEmailHtml', () => {
     expect(html).toContain('Need bulk CPUs monthly')
   })
 })
+
+describe('buildContactEmailHtml escaping', () => {
+  it('入力の HTML をそのまま埋め込まない', () => {
+    const html = buildContactEmailHtml({
+      name: '<img src=x onerror=alert(1)>',
+      company: '',
+      country: 'US',
+      email: 'a@b.co',
+      ebayUsername: '',
+      desiredParts: '<a href="http://evil">click</a>',
+      quantity: '1',
+      message: 'hi & bye',
+    })
+    expect(html).not.toContain('<img')
+    expect(html).not.toContain('<a href')
+    expect(html).toContain('&lt;img src=x onerror=alert(1)&gt;')
+    expect(html).toContain('hi &amp; bye')
+  })
+})
