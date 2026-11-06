@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import Link from 'next/link'
 import { getProductBySlug, getProducts } from '@/lib/sedora'
 import StatusBadge from '@/components/StatusBadge'
 import ProductCard from '@/components/ProductCard'
+import ProductGallery from '@/components/ProductGallery'
 import { Product } from '@/types/product'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
@@ -32,13 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: product.title_en,
       description: `Used ${product.title_en} from Japan. ${product.condition}. Ships worldwide via eBay.`,
-      images: product.ebay_image_url ? [{ url: product.ebay_image_url }] : [],
+      images: (product.images ?? []).slice(0, 4).map((url) => ({ url })),
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title: product.title_en,
-      images: product.ebay_image_url ? [product.ebay_image_url] : [],
+      images: (product.images ?? []).slice(0, 1),
     },
   }
 }
@@ -63,15 +63,15 @@ export default async function ProductPage({ params }: Props) {
   const categoryPath = product.category.toLowerCase().replace(/\s+/g, '-')
 
   const details: [string, string][] = [
-    ['Brand', product.brand],
-    ['Model', product.model],
+    ['Brand', product.brand || '—'],
+    ['Model', product.model || '—'],
     ...(product.partNumber ? [['Part Number', product.partNumber] as [string, string]] : []),
     ['Category', product.category],
     ['Condition', product.condition],
     ['Tested', product.tested ? 'Yes — boot tested' : 'No'],
     ...(product.socket ? [['Socket', product.socket] as [string, string]] : []),
     ...(product.memoryType ? [['Memory Type', product.memoryType] as [string, string]] : []),
-    ['Pulled From', 'Working business PC in Japan'],
+    ['Pulled From', product.condition === 'For Parts' ? 'Business PC in Japan (sold for parts)' : 'Business PC in Japan'],
     ['Ships From', 'Japan'],
     ['Shipping', 'eBay Global Shipping — Tracking included'],
     ['Stock', product.stock > 0 ? `${product.stock} available` : 'Out of stock'],
@@ -81,11 +81,11 @@ export default async function ProductPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title_en,
-    image: product.ebay_image_url ? [product.ebay_image_url] : [],
+    image: product.images ?? [],
     description: generateDescription(product),
     sku: product.id,
     mpn: product.partNumber ?? product.model,
-    brand: { '@type': 'Brand', name: product.brand },
+    ...(product.brand ? { brand: { '@type': 'Brand', name: product.brand } } : {}),
     category: product.category,
     itemCondition: 'https://schema.org/UsedCondition',
     offers: {
@@ -124,16 +124,10 @@ export default async function ProductPage({ params }: Props) {
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="relative aspect-square bg-bg-secondary border border-white/10 rounded overflow-hidden">
-            <Image
-              src={product.ebay_image_url || 'https://placehold.co/600x600/1d222b/9ca3af?text=No+Image'}
-              alt={`${product.title_en} ${product.partNumber ?? product.model} from Japan`}
-              fill
-              className="object-contain p-8"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
-          </div>
+          <ProductGallery
+            images={product.images ?? []}
+            alt={`${product.title_en} ${product.partNumber ?? product.model} from Japan`}
+          />
 
           <div>
             <div className="flex flex-wrap gap-2 mb-4">

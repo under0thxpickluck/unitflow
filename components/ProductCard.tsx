@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Product } from '@/types/product'
 import StatusBadge from './StatusBadge'
+import NoImage from './NoImage'
 
 interface Props {
   product: Product
@@ -11,13 +12,17 @@ export default function ProductCard({ product }: Props) {
   return (
     <div className="bg-bg-secondary border border-white/10 rounded hover:border-white/20 transition-colors group">
       <div className="relative aspect-square overflow-hidden rounded-t bg-bg-tertiary">
-        <Image
-          src={product.ebay_image_url || 'https://placehold.co/400x400/1d222b/9ca3af?text=No+Image'}
-          alt={`${product.title_en} from Japan`}
-          fill
-          className="object-contain p-4"
-          sizes="(max-width: 768px) 50vw, 25vw"
-        />
+        {product.ebay_image_url ? (
+          <Image
+            src={product.ebay_image_url}
+            alt={`${product.title_en} from Japan`}
+            fill
+            className="object-contain p-4"
+            sizes="(max-width: 768px) 50vw, 25vw"
+          />
+        ) : (
+          <NoImage />
+        )}
       </div>
 
       <div className="p-4">
@@ -50,6 +55,7 @@ export default function ProductCard({ product }: Props) {
 
         <span className={`text-xs block mb-3 ${product.stock > 0 ? 'text-green-400' : 'text-gray-500'}`}>
           {product.stock > 0 ? `● In Stock (${product.stock})` : '○ Out of Stock'}
+          {product.status === 'listed' && <span className="text-gray-500"> · Listed on eBay</span>}
         </span>
 
         <div className="flex gap-2">

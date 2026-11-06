@@ -62,6 +62,12 @@ const CATEGORY_CONFIG: Record<string, CategoryConfig> = {
     h1: 'Used SSD and HDD from Japan',
     description: 'Browse used SSDs and HDDs sourced from Japanese business PCs. Storage devices are listed with clear condition notes.',
   },
+  other: {
+    productCategory: 'Other',
+    title: 'Used Desktops, Laptops and Other PC Hardware from Japan | UNITFLOW JAPAN',
+    h1: 'Other PC Hardware from Japan',
+    description: 'Complete desktops, laptops and other PC hardware sourced in Japan. Condition is stated on every listing.',
+  },
   'oem-parts': {
     oemBrands: ['HP', 'Dell', 'Lenovo', 'Fujitsu', 'ASUS'],
     title: 'OEM PC Parts from Japan | Dell HP Lenovo ASUS Parts | UNITFLOW JAPAN',

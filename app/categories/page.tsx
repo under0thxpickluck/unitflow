@@ -18,6 +18,7 @@ const CATEGORY_INFO: Record<ProductCategory, { desc: string }> = {
   Motherboard: { desc: 'LGA1155, LGA1150, AM3 motherboards. MicroATX and ATX. OEM and retail.' },
   PSU: { desc: '250W–500W power supplies from business desktops. Tested.' },
   Storage: { desc: 'SATA SSDs, HDDs, and 2.5" drives. Multiple capacity options.' },
+  Other: { desc: 'Complete desktops, laptops and other hardware. Sold as-is or for parts unless tested.' },
 }
 
 export default async function CategoriesPage() {

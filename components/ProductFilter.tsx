@@ -15,7 +15,7 @@ interface Props {
   availableBrands: string[]
 }
 
-const CATEGORIES: ProductCategory[] = ['CPU', 'GPU', 'Memory', 'Motherboard', 'PSU', 'Storage']
+const CATEGORIES: ProductCategory[] = ['CPU', 'GPU', 'Memory', 'Motherboard', 'PSU', 'Storage', 'Other']
 const CONDITIONS: ProductCondition[] = ['Tested', 'Untested', 'For Parts', 'As-is']
 
 export default function ProductFilter({ filters, onChange, availableSockets, availableBrands }: Props) {
