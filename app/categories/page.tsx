@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getProducts } from '@/lib/sedora'
 import { ProductCategory } from '@/types/product'
+import GenreGrid from '@/components/GenreGrid'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
 
 export const metadata: Metadata = {
   title: 'Categories — Used PC Parts from Japan',
-  description: 'Browse used PC parts by category — CPU, GPU, Memory, Motherboard, PSU, Storage. Sourced from business PCs in Japan.',
+  description: 'Browse used PC parts by category — CPU, GPU, Memory, Motherboard, PSU, Storage — and upcoming genres from Japan.',
   alternates: { canonical: `${SITE_URL}/categories` },
 }
 
@@ -31,7 +32,8 @@ export default async function CategoriesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-2xl font-bold text-white mb-2">Categories</h1>
-      <p className="text-gray-500 text-sm mb-10">Browse by component type</p>
+      <p className="text-gray-500 text-sm mb-10">PC parts in stock now, plus more genres from Japan coming soon</p>
+      <h2 className="text-sm font-bold text-white mb-4">PC Parts</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {(Object.keys(CATEGORY_INFO) as ProductCategory[]).map((cat) => (
           <Link key={cat} href={`/categories/${cat.toLowerCase()}`}
@@ -46,6 +48,10 @@ export default async function CategoriesPage() {
           </Link>
         ))}
       </div>
+
+      <h2 id="more" className="text-sm font-bold text-white mt-14 mb-1">More from Japan</h2>
+      <p className="text-gray-500 text-xs mb-4">No items listed yet. Request an item from any genre page and we will check if we can source it.</p>
+      <GenreGrid />
     </div>
   )
 }

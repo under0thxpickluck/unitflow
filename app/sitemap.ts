@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getProducts } from '@/lib/sedora'
+import { GENRES } from '@/lib/genres'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://unitflow.jp'
 
@@ -48,5 +49,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticRoutes, ...productPages]
+  // 商品の無いジャンルは載せない（noindex にしている）
+  const genrePages: MetadataRoute.Sitemap = GENRES.filter((g) => g.hasStock).map((g) => ({
+    url: `${BASE_URL}/genres/${g.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticRoutes, ...genrePages, ...productPages]
 }

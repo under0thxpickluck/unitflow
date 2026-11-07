@@ -13,6 +13,10 @@ export default function Footer() {
               Used PC parts specialist in Japan.<br />
               Sourced from business PCs. Tested and shipped worldwide via eBay.
             </p>
+            <p className="text-gray-600 text-xs leading-relaxed mt-3">
+              Coming soon: trading cards, figures, video games, cameras, watches and more from Japan.{' '}
+              <Link href="/categories#more" className="text-gray-500 hover:text-gray-300 underline">All genres</Link>
+            </p>
           </div>
 
           <div>

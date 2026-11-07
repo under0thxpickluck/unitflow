@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { getProducts } from '@/lib/sedora'
 import ProductCard from '@/components/ProductCard'
+import GenreGrid from '@/components/GenreGrid'
 import { TodaysProcessing } from '@/types/product'
 import { readFile } from 'fs/promises'
 import path from 'path'
@@ -60,6 +61,10 @@ export default async function HomePage() {
               Tested CPUs, memory, motherboards, GPUs and OEM parts sourced from business PCs in Japan.
               Genuine hardware. Honest grading. Shipped worldwide.
             </p>
+            <p className="text-gray-500 text-sm leading-relaxed -mt-4 mb-8">
+              Coming soon: Japanese trading cards, figures, video games, cameras and more.{' '}
+              <Link href="#genres" className="text-blue-400 hover:text-blue-300">See all genres →</Link>
+            </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/inventory" className="bg-white text-gray-900 hover:bg-gray-100 font-medium px-6 py-3 rounded transition-colors">
                 Browse Inventory
@@ -105,6 +110,25 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Shop by genre */}
+      <section id="genres" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-20">
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-white">Shop by Genre</h2>
+          <p className="text-gray-500 text-sm mt-1">PC parts in stock now. More genres from Japan are on the way.</p>
+        </div>
+        <Link
+          href="/categories"
+          className="flex items-center justify-between gap-4 bg-bg-tertiary border border-white/10 hover:border-white/20 rounded p-5 mb-3 transition-colors group"
+        >
+          <div>
+            <h3 className="text-white font-medium group-hover:text-blue-400 transition-colors">PC Parts</h3>
+            <p className="text-gray-500 text-xs mt-1">CPUs, memory, motherboards, GPUs, power supplies and storage from Japanese business PCs.</p>
+          </div>
+          <span className="shrink-0 text-[10px] font-mono text-green-400 border border-green-800 px-1.5 py-0.5 rounded">In stock</span>
+        </Link>
+        <GenreGrid />
       </section>
 
       {/* Workshop */}

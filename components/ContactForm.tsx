@@ -9,8 +9,8 @@ interface FormState {
 
 const INITIAL: FormState = { name: '', company: '', country: '', email: '', ebayUsername: '', desiredParts: '', quantity: '', message: '', website: '' }
 
-export default function ContactForm() {
-  const [form, setForm] = useState<FormState>(INITIAL)
+export default function ContactForm({ initialDesired = '' }: { initialDesired?: string }) {
+  const [form, setForm] = useState<FormState>({ ...INITIAL, desiredParts: initialDesired })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -66,7 +66,7 @@ export default function ContactForm() {
         <div><label className={labelClass}>eBay Username</label><input value={form.ebayUsername} onChange={set('ebayUsername')} placeholder="Optional" className={inputClass} /></div>
         <div><label className={labelClass}>Quantity *</label><input required value={form.quantity} onChange={set('quantity')} placeholder="e.g. 50 units" className={inputClass} /></div>
       </div>
-      <div><label className={labelClass}>Desired Parts *</label><input required value={form.desiredParts} onChange={set('desiredParts')} placeholder="e.g. Intel Core i5-3470 x50" className={inputClass} /></div>
+      <div><label className={labelClass}>Desired Items *</label><input required value={form.desiredParts} onChange={set('desiredParts')} placeholder="e.g. Intel Core i5-3470 x50 / Japanese Pokémon cards" className={inputClass} /></div>
       <div><label className={labelClass}>Message *</label><textarea required rows={4} value={form.message} onChange={set('message')} placeholder="Tell us about your requirements..." className={inputClass} /></div>
       {status === 'error' && <p className="text-red-400 text-sm">{errorMsg}</p>}
       <button type="submit" disabled={status === 'loading'}

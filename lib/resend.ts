@@ -26,7 +26,7 @@ const ROWS: [string, keyof ContactFormData][] = [
   ['Country', 'country'],
   ['Email', 'email'],
   ['eBay Username', 'ebayUsername'],
-  ['Desired Parts', 'desiredParts'],
+  ['Desired Items', 'desiredParts'],
   ['Quantity', 'quantity'],
   ['Message', 'message'],
 ]
